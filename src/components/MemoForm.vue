@@ -9,7 +9,7 @@
   <br />
   <input
     type="submit"
-    value="追加"
+    value="編集"
     @click="
       addMemo();
       switchFalse();
