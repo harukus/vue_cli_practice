@@ -53,13 +53,9 @@ export default {
       if (!this.newMemo) {
         return;
       }
-      this.memos[this.idx] = this.newMemo;
-      this.saveMemos();
-      this.$emit("update", this.memos);
-    },
-    saveMemos() {
-      const parsed = JSON.stringify(this.memos);
-      localStorage.setItem("memos", parsed);
+      // this.memos[this.idx] = this.newMemo;
+      this.$emit("update", this.newMemo, this.idx);
+      this.newMemo = ""
     },
     removeTodo(idx) {
       if (!this.newMemo) {

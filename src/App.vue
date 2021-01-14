@@ -4,7 +4,7 @@
       <div class="list">
         <MemoDetails
           v-bind:memos="memos"
-          v-on:update="handleCurrentSelectedMemo"
+          v-on:select="handleCurrentSelectedMemo"
           v-on:clickedAddMemo="handleClickedAddMemo"
         />
       </div>
@@ -30,8 +30,12 @@ export default {
     MemoDetails,
   },
   methods: {
-    handleUpdate(newMemos) {
-      this.memos = newMemos;
+    handleUpdate(newMemo, idx) {
+      // this.memos = newMemos;
+      this.memos[idx] = newMemo
+      console.log(`hi${idx}`)
+      const parsed = JSON.stringify(this.memos);
+      localStorage.setItem("memos", parsed);
     },
     handleCurrentSelectedMemo(memo, idx) {
       this.currentSelectedMemo = { memo: memo, idx: idx };
