@@ -34,16 +34,17 @@ export default {
   methods: {
     handleUpdate(newMemo, idx) {
       this.memos[idx] = newMemo
-      const parsed = JSON.stringify(this.memos);
-      localStorage.setItem("memos", parsed);
+      this.saveMemo()
     },
     handleAdd(newMemo){
       this.memos.push(newMemo)
-      const parsed = JSON.stringify(this.memos);
-      localStorage.setItem("memos", parsed)
+      this.saveMemo()
     },
     handleDestroy(idx){
       this.memos.splice(idx, 1);
+      this.saveMemo()
+    },
+    saveMemo(){
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed)
     },
