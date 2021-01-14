@@ -75,17 +75,7 @@ export default {
     switchFalse() {
       this.$emit("switchFalse");
     },
-  },
-  mounted() {
-    if (localStorage.getItem("memos")) {
-      try {
-        this.memos = JSON.parse(localStorage.getItem("memos"));
-        this.$emit("update", this.memos);
-      } catch (e) {
-        localStorage.removeItem("memos");
-      }
-    }
-  },
+  }
 };
 </script>
 

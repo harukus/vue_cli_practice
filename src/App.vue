@@ -57,6 +57,15 @@ export default {
       show: false,
     };
   },
+  mounted() {
+    if (localStorage.getItem("memos")) {
+      try {
+        this.memos = JSON.parse(localStorage.getItem("memos"));
+      } catch (e) {
+        localStorage.removeItem("memos");
+      }
+    }
+  },
 };
 </script>
 <style>
