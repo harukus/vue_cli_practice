@@ -11,7 +11,7 @@
     type="submit"
     value="編集"
     @click="
-      addMemo();
+      updateMemo();
     "
   />
   <button
@@ -34,7 +34,7 @@ export default {
     };
   },
   props: ["currentSelectedMemo", "clickedAddMemo"],
-  emits: ["update"],
+  emits: ["update","add"],
   watch: {
     currentSelectedMemo: function () {
       this.idx = this.currentSelectedMemo.idx;
@@ -42,19 +42,25 @@ export default {
     },
     clickedAddMemo: function () {
       const content = "新規メモ";
+      console.log(` clickedAddMemo:  ${this.memos}`)
       this.newMemo = content;
-      this.idx = this.memos.length;
       this.addMemo();
-      this.newMemo = content;
     },
   },
   methods: {
-    addMemo() {
+    updateMemo() {
       if (!this.newMemo) {
         return;
       }
       // this.memos[this.idx] = this.newMemo;
       this.$emit("update", this.newMemo, this.idx);
+      this.newMemo = ""
+    },
+    addMemo(){
+      if (!this.newMemo) {
+        return;
+      }
+      this.$emit("add", this.newMemo);
       this.newMemo = ""
     },
     removeTodo(idx) {
