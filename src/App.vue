@@ -13,6 +13,7 @@
           <MemoForm
             v-on:update="handleUpdate"
             v-on:add="handleAdd"
+            v-on:destroy="handleDestroy"
             v-bind:currentSelectedMemo="currentSelectedMemo"
             v-bind:clickedAddMemo="clickedAddMemo"
           />
@@ -32,15 +33,17 @@ export default {
   },
   methods: {
     handleUpdate(newMemo, idx) {
-      // this.memos = newMemos;
       this.memos[idx] = newMemo
-      console.log(`handleupdate:${this.memos}`)
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed);
     },
     handleAdd(newMemo){
       this.memos.push(newMemo)
-      console.log(this.memos)
+      const parsed = JSON.stringify(this.memos);
+      localStorage.setItem("memos", parsed)
+    },
+    handleDestroy(idx){
+      this.memos.splice(idx, 1);
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed)
     },

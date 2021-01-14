@@ -16,7 +16,7 @@
   />
   <button
     v-on:click="
-      removeTodo(idx);
+      destroyMemo(idx);
     "
   >
     削除する
@@ -34,7 +34,7 @@ export default {
     };
   },
   props: ["currentSelectedMemo", "clickedAddMemo"],
-  emits: ["update","add"],
+  emits: ["update","add","destroy"],
   watch: {
     currentSelectedMemo: function () {
       this.idx = this.currentSelectedMemo.idx;
@@ -63,18 +63,16 @@ export default {
       this.$emit("add", this.newMemo);
       this.newMemo = ""
     },
-    removeTodo(idx) {
+    destroyMemo(idx) {
       if (!this.newMemo) {
         return;
       }
-      this.memos.splice(idx, 1);
-      this.saveMemos();
+      this.$emit("destroy",idx)
+      // this.memos.splice(idx, 1);
+      // this.saveMemos();
       this.newMemo = "";
       this.idx = null;
-    },
-    switchFalse() {
-      this.$emit("switchFalse");
-    },
+    }
   }
 };
 </script>
