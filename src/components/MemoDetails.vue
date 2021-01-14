@@ -7,7 +7,6 @@
           href="#"
           v-on:click="
             select(memo, idx);
-            switchTrue();
           "
           >{{ memo.split("\n")[0] }}</a
         >
@@ -17,7 +16,6 @@
   <button
     v-on:click="
       handleClickedAddMemo();
-      switchTrue();
     "
   >
     +
@@ -26,17 +24,14 @@
 <script>
 export default {
   props: ["memos"],
-  emits: ["update", "clickedAddMemo", "switchTrue"],
+  emits: ["update", "clickedAddMemo"],
   methods: {
     select(memo, idx) {
       this.$emit("update", memo, idx);
     },
     handleClickedAddMemo() {
       this.$emit("clickedAddMemo");
-    },
-    switchTrue() {
-      this.$emit("switchTrue");
-    },
+    }
   },
 };
 </script>

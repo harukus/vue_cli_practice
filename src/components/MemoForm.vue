@@ -12,13 +12,11 @@
     value="編集"
     @click="
       addMemo();
-      switchFalse();
     "
   />
   <button
     v-on:click="
       removeTodo(idx);
-      switchFalse();
     "
   >
     削除する
@@ -36,7 +34,7 @@ export default {
     };
   },
   props: ["currentSelectedMemo", "clickedAddMemo"],
-  emits: ["update", "switchFalse"],
+  emits: ["update"],
   watch: {
     currentSelectedMemo: function () {
       this.idx = this.currentSelectedMemo.idx;

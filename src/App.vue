@@ -6,7 +6,6 @@
           v-bind:memos="memos"
           v-on:update="handleCurrentSelectedMemo"
           v-on:clickedAddMemo="handleClickedAddMemo"
-          v-on:switchTrue="switchTrue"
         />
       </div>
       <div class="edit">
@@ -15,7 +14,6 @@
             v-on:update="handleUpdate"
             v-bind:currentSelectedMemo="currentSelectedMemo"
             v-bind:clickedAddMemo="clickedAddMemo"
-            v-on:switchFalse="switchFalse"
           />
         </div>
       </div>
@@ -40,13 +38,7 @@ export default {
     },
     handleClickedAddMemo() {
       this.clickedAddMemo += 1;
-    },
-    switchTrue() {
-      this.show = true;
-    },
-    switchFalse() {
-      this.show = false;
-    },
+    }
   },
   data() {
     return {
@@ -54,7 +46,7 @@ export default {
       currentSelectedMemo: null,
       idx: null,
       clickedAddMemo: 1,
-      show: false,
+      show: true,
     };
   },
   mounted() {
