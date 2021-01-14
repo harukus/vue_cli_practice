@@ -47,11 +47,14 @@ export default {
     saveMemo(){
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed)
+      this.show = false
     },
     handleCurrentSelectedMemo(memo, idx) {
+      this.show = true
       this.currentSelectedMemo = { memo: memo, idx: idx };
     },
     handleClickedAddMemo() {
+      this.show = true
       this.clickedAddMemo += 1;
     }
   },
@@ -61,7 +64,7 @@ export default {
       currentSelectedMemo: null,
       idx: null,
       clickedAddMemo: 1,
-      show: true,
+      show: false,
     };
   },
   mounted() {
