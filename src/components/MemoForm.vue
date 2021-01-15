@@ -28,39 +28,19 @@ export default {
   data() {
     return {
       memos: [],
-      newMemo: null,
-      idx: null,
+      newMemo: this.currentSelectedMemo.memo,
+      idx: this.currentSelectedMemo.idx,
       show: false,
     };
   },
-  props: ["currentSelectedMemo", "clickedAddMemo"],
-  emits: ["update","add","destroy"],
-  watch: {
-    currentSelectedMemo: function () {
-      this.idx = this.currentSelectedMemo.idx;
-      this.newMemo = this.currentSelectedMemo.memo;
-    },
-    clickedAddMemo: function () {
-      const content = "新規メモ";
-      console.log(` clickedAddMemo:  ${this.memos}`)
-      this.newMemo = content;
-      this.addMemo();
-    },
-  },
+  props: ["currentSelectedMemo"],
+  emits: ["update","destroy"],
   methods: {
     updateMemo() {
       if (!this.newMemo) {
         return;
       }
-      // this.memos[this.idx] = this.newMemo;
       this.$emit("update", this.newMemo, this.idx);
-      this.newMemo = ""
-    },
-    addMemo(){
-      if (!this.newMemo) {
-        return;
-      }
-      this.$emit("add", this.newMemo);
       this.newMemo = ""
     },
     destroyMemo(idx) {
@@ -68,8 +48,6 @@ export default {
         return;
       }
       this.$emit("destroy",idx)
-      // this.memos.splice(idx, 1);
-      // this.saveMemos();
       this.newMemo = "";
       this.idx = null;
     }

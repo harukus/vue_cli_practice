@@ -9,13 +9,11 @@
         />
       </div>
       <div class="edit">
-        <div v-show="show">
+        <div v-if="show">
           <MemoForm
             v-on:update="handleUpdate"
-            v-on:add="handleAdd"
             v-on:destroy="handleDestroy"
             v-bind:currentSelectedMemo="currentSelectedMemo"
-            v-bind:clickedAddMemo="clickedAddMemo"
           />
         </div>
       </div>
@@ -35,19 +33,16 @@ export default {
     handleUpdate(newMemo, idx) {
       this.memos[idx] = newMemo
       this.saveMemo()
-    },
-    handleAdd(newMemo){
-      this.memos.push(newMemo)
-      this.saveMemo()
+      this.show = false
     },
     handleDestroy(idx){
       this.memos.splice(idx, 1);
       this.saveMemo()
+      this.show = false
     },
     saveMemo(){
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed)
-      this.show = false
     },
     handleCurrentSelectedMemo(memo, idx) {
       this.show = true
@@ -55,7 +50,10 @@ export default {
     },
     handleClickedAddMemo() {
       this.show = true
-      this.clickedAddMemo += 1;
+      this.memos.push("新規メモ")
+      this.saveMemo()
+      this.idx = this.memos.length - 1
+      this.currentSelectedMemo = { memo: "新規メモ", idx: this.idx }
     }
   },
   data() {
@@ -63,7 +61,6 @@ export default {
       memos: [],
       currentSelectedMemo: null,
       idx: null,
-      clickedAddMemo: 1,
       show: false,
     };
   },
