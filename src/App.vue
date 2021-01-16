@@ -4,8 +4,8 @@
       <div class="list">
         <MemoDetails
           v-bind:memos="memos"
-          v-on:select="handleCurrentSelectedMemo"
-          v-on:clickedAddMemo="handleClickedAddMemo"
+          v-on:editMemo="handleEditMemo"
+          v-on:createMemo="handleCreateMemo"
         />
       </div>
       <div class="edit">
@@ -13,7 +13,7 @@
           <MemoForm
             v-on:update="handleUpdate"
             v-on:destroy="handleDestroy"
-            v-bind:currentSelectedMemo="currentSelectedMemo"
+            v-bind:editMemo="editMemo"
           />
         </div>
       </div>
@@ -44,22 +44,22 @@ export default {
       const parsed = JSON.stringify(this.memos);
       localStorage.setItem("memos", parsed)
     },
-    handleCurrentSelectedMemo(memo, idx) {
+    handleEditMemo(memo, idx) {
       this.show = true
-      this.currentSelectedMemo = { memo: memo, idx: idx };
+      this.editMemo = { memo: memo, idx: idx };
     },
-    handleClickedAddMemo() {
+    handleCreateMemo() {
       this.show = true
       this.memos.push("新規メモ")
       this.saveMemo()
       this.idx = this.memos.length - 1
-      this.currentSelectedMemo = { memo: "新規メモ", idx: this.idx }
+      this.editMemo = { memo: "新規メモ", idx: this.idx }
     }
   },
   data() {
     return {
       memos: [],
-      currentSelectedMemo: null,
+      editMemo: null,
       idx: null,
       show: false,
     };

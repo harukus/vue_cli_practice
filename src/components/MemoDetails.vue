@@ -6,7 +6,7 @@
         <a
           href="#"
           v-on:click="
-            handleSelect(memo, idx);
+            handleEditMemo(memo, idx);
           "
           >{{ memo.split("\n")[0] }}</a
         >
@@ -15,7 +15,7 @@
   </nav>
   <button
     v-on:click="
-      handleClickedAddMemo();
+      handleCreateMemo();
     "
   >
     +
@@ -24,13 +24,13 @@
 <script>
 export default {
   props: ["memos"],
-  emits: ["select", "clickedAddMemo"],
+  emits: ["editMemo", "createMemo"],
   methods: {
-    handleSelect(memo, idx) {
-      this.$emit("select", memo, idx);
+    handleEditMemo(memo, idx) {
+      this.$emit("editMemo", memo, idx);
     },
-    handleClickedAddMemo() {
-      this.$emit("clickedAddMemo");
+    handleCreateMemo() {
+      this.$emit("createMemo");
     }
   },
 };

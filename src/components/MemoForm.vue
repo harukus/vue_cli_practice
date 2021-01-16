@@ -28,12 +28,12 @@ export default {
   data() {
     return {
       memos: [],
-      newMemo: this.currentSelectedMemo.memo,
-      idx: this.currentSelectedMemo.idx,
+      newMemo: this.editMemo.memo,
+      idx: this.editMemo.idx,
       show: false,
     };
   },
-  props: ["currentSelectedMemo"],
+  props: ["editMemo"],
   emits: ["update","destroy"],
   methods: {
     updateMemo() {
