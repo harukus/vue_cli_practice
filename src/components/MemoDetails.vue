@@ -2,7 +2,7 @@
   <p>一覧</p>
   <nav class="menu">
     <ul>
-      <li v-for="(memo, idx) in memos" v-bind:key="memo">
+      <li v-for="(memo, idx) in memos" v-bind:key="idx">
         <a
           href="#"
           v-on:click="
